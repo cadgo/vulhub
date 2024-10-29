@@ -1,0 +1,18 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "ci-scan" ]
+  pull_request:
+    branches: [ "ci-scan" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: cd log4j; docker build . --file Dockerfile --tag my-image-name:$(date +%s)
